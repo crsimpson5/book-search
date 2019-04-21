@@ -19,6 +19,10 @@ const BookSchema = new Schema({
   },
   link: {
     type: String
+  },
+  dateAdded: {
+    type: Date,
+    default: Date.now
   }
 });
 

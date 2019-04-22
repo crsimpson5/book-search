@@ -7,13 +7,21 @@ class SavedBooksCard extends Component {
     books: []
   }
 
-  componentDidMount() {
+  updateBooks = () => {
     API.getBooks()
       .then(res => {
         this.setState({
           books: res.data
         });
       });
+  };
+
+  componentDidMount() {
+    this.updateBooks();
+  }
+
+  componentDidUpdate() {
+    this.updateBooks();
   }
 
   render() {
@@ -33,7 +41,7 @@ class SavedBooksCard extends Component {
                       </Col>
                       <Col lg={2} className="text-right">
                         <Button variant="primary" href={book.link} target="_blank">View</Button>
-                        <Button variant="primary" className="ml-1" data-idx={index} >Remove</Button>
+                        <Button variant="primary" className="ml-1" onClick={() => API.deleteBook(book._id)}>Remove</Button>
                       </Col>
                     </Row>
                     <Row>

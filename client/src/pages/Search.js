@@ -28,17 +28,19 @@ class Search extends Component {
       .then(res => {
         let books = [];
 
-        res.data.items.forEach(book => {
-          book = book.volumeInfo;
-          
-          books.push({
-            title: book.title,
-            authors: book.authors,
-            description: book.description,
-            image: book.imageLinks.thumbnail,
-            link: book.infoLink
+        if (res.data.items) {
+          res.data.items.forEach(book => {
+            book = book.volumeInfo;
+            
+            books.push({
+              title: book.title,
+              authors: book.authors,
+              description: book.description,
+              image: book.imageLinks.thumbnail,
+              link: book.infoLink
+            });
           });
-        });
+        }
 
         this.setState({ query: this.state.input }, () => {
           this.setState({
